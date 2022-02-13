@@ -1,5 +1,4 @@
 const app = require('express')()
-const cors = require('cors')
 const userModel = require('../components/models')
 const bcrypt = require('bcrypt')
 const { loginValidation } = require('../components/validation')
@@ -7,13 +6,6 @@ const JWT = require('jsonwebtoken')
 
 const dotenv = require('dotenv')
 dotenv.config()
-
-const corsOptions = {
-    origin: '*',
-    credentials: true,
-    optionSuccessStatus: 200
-}
-app.use(cors(corsOptions))
 
 app.post('/', async (req,res)=>{
     //data validation

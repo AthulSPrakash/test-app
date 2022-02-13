@@ -41,7 +41,10 @@ function Reg({userLoggedIn, userData}) {
         }
         const requestOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+           },
           body: JSON.stringify(regData)
         }
         fetch(`${url}/api/register`, requestOptions)
@@ -62,7 +65,10 @@ function Reg({userLoggedIn, userData}) {
     const token = {token: res.tokenId}
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+         },
         body: JSON.stringify(token)
     }
     fetch(`${url}/api/gauth`, requestOptions)

@@ -164,6 +164,7 @@ function Dashboard({userData}) {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
                 'auth-token': userData.token
             },
             body: JSON.stringify(reqData)
