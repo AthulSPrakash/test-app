@@ -1,2 +1,2 @@
 # Test SPA
-Live : https://relaxed-darwin-d3e283.netlify.app
+Live : https://dazzling-heyrovsky-562cd1.netlify.app/
