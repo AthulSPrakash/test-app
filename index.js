@@ -8,9 +8,7 @@ const SaveData = require('./routes/saveData')
 const app = express()
 
 const corsOptions = {
-    origin: '*',
-    credentials: true,
-    optionSuccessStatus: 200
+    origin: '*'
 }
 
 app.use(cors(corsOptions))
