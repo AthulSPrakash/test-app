@@ -36,10 +36,6 @@ mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/$
 
 app.use(express.json())
 
-app.get('/', (req,res)=>{
-    res.json('server running')
-})
-
 app.use('/api/gauth', Google)
 app.use('/api/login', Login)
 app.use('/api/register', Register)
