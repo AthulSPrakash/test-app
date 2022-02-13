@@ -7,7 +7,13 @@ const Register = require('./routes/register')
 const SaveData = require('./routes/saveData')
 const app = express()
 
-app.use(cors())
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 
 const dotenv = require('dotenv')
 dotenv.config()
