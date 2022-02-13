@@ -42,8 +42,7 @@ function Reg({userLoggedIn, userData}) {
         const requestOptions = {
           method: 'POST',
           headers: { 
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
            },
           body: JSON.stringify(regData)
         }
@@ -66,8 +65,7 @@ function Reg({userLoggedIn, userData}) {
     const requestOptions = {
         method: 'POST',
         headers: { 
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Content-Type': 'application/json'
          },
         body: JSON.stringify(token)
     }
