@@ -1,0 +1,11 @@
+:root{
+    --bg: white;
+    --primary: blueviolet;
+    --secondary: crimson;
+    --dim: lightgrey;
+    --txt: white;
+    --txt-alt: rgb(20, 20, 100);
+    --btn-bg: lavender;
+    --off: grey;
+    --txt-dark: rgb(10,10,10);
+}
