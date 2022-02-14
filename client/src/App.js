@@ -36,6 +36,10 @@ function App() {
     }
   }
 
+  fetch('https://test-athul.herokuapp.com')
+  .then(res=>res.json())
+  .then(data=>console.log(data))
+
   return (
     <div className="App">
       <nav className='app-nav'>
