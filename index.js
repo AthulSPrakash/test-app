@@ -11,7 +11,13 @@ const app = express()
 
 dotenv.config()
 
-app.use(cors())
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 
 const port = process.env.PORT || 5000
 const username = process.env.USER_NAME
