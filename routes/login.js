@@ -1,6 +1,5 @@
 const app = require('express')()
 const userModel = require('../components/models')
-const cors = require('cors')
 const bcrypt = require('bcrypt')
 const { loginValidation } = require('../components/validation')
 const JWT = require('jsonwebtoken')
@@ -8,7 +7,7 @@ const JWT = require('jsonwebtoken')
 const dotenv = require('dotenv')
 dotenv.config()
 
-app.post('/', cors(), async (req,res)=>{
+app.post('/', async (req,res)=>{
     //data validation
     const err = loginValidation(req.body)
     if(err) return res.status(400).json(err.details[0].message)

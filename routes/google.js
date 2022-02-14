@@ -1,5 +1,4 @@
 const app = require('express')()
-const cors = require('cors')
 const { googleAuth } = require('../components/validation')
 const userModel = require('../components/models')
 const bcrypt = require('bcrypt')
@@ -8,7 +7,7 @@ const JWT = require('jsonwebtoken')
 const dotenv = require('dotenv')
 dotenv.config()
 
-app.post('/', cors(), async (req,res)=>{
+app.post('/', async (req,res)=>{
 
     const user = await googleAuth(req.body.token)
     const emailExist = await userModel.findOne({ email: user.email })

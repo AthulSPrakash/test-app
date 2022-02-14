@@ -2,14 +2,21 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const Login = require('./routes/login')
-const Google = require('./routes/google')
+// const Google = require('./routes/google')
 const Register = require('./routes/register')
 const SaveData = require('./routes/saveData')
+
+const { googleAuth } = require('../components/validation')
+const userModel = require('../components/models')
+const bcrypt = require('bcrypt')
+const JWT = require('jsonwebtoken')
 
 const app = express()
 
 const dotenv = require('dotenv')
 dotenv.config()
+
+app.use(cors())
 
 const port = process.env.PORT || 5000
 
@@ -29,10 +36,47 @@ mongoose.connect(url,
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.log(err))
 
-app.use(cors())
 app.use(express.json())
 
-app.use('/api/gauth', Google)
+app.post('/api/gauth', async (req,res)=>{
+
+    const user = await googleAuth(req.body.token)
+    const emailExist = await userModel.findOne({ email: user.email })
+
+    const token = JWT.sign({_id: user.id}, process.env.TOKEN_KEY)
+    
+    const data = {
+        token: token,
+        email: user.email,
+        name: user.name,
+        image: user.image,
+        data: emailExist && emailExist.data || []
+    }
+
+    if(!emailExist){
+        const salt = await bcrypt.genSalt(10)
+        const cipherPass = await bcrypt.hash(user.id, salt)
+
+        const newUser = new userModel({
+            username: user.name,
+            email: user.email,
+            password: cipherPass,
+            image: user.image,
+            data: []
+        })
+
+        try{
+            await newUser.save()
+            res.status(200).json(data)
+        }catch (err){
+            res.status(500).json(err)
+        }
+    }else{
+        res.status(200).json(data)
+    }
+})
+
+// app.use('/api/gauth', Google)
 app.use('/api/login', Login)
 app.use('/api/register', Register)
 app.use('/api/save', SaveData)
