@@ -10,8 +10,13 @@ const app = express()
 
 const corsOption = {
     origin: '*',
-    credentials: true,
-    optionSuccessStatus: 200,
+    methodd: [
+        'GET',
+        'POST'
+    ],
+    allowedHeaders: [
+        'Content-Type',
+    ],
 }
 
 app.use(cors(corsOption))
