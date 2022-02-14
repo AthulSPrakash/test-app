@@ -92,3 +92,20 @@ input:focus{
 #pic{
     border: none;
 }
+.ntfnl,.ntfnr{
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 30em;
+    margin-top: 1em;
+}
+.ntfnl{
+    top: 24em;
+}
+.msg{
+    color: var(--secondary);
+    font-size: 0.8em;
+}

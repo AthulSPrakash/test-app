@@ -19,7 +19,8 @@ app.post('/', async (req,res)=>{
     const user = new userModel({
         username: req.body.username,
         email: req.body.email,
-        password: cipherPass
+        password: cipherPass,
+        data: []
     })
 
     try{

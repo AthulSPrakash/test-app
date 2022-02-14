@@ -11,8 +11,10 @@ function Login({userLoggedIn, userData}) {
         email: '',
         password: ''
     })
+    const [message, setMessage] = useState('') 
 
     const handleChange = (e) => {
+        setMessage('')
         setFormData(prevFormData=>{
             return({
                 ...prevFormData,
@@ -20,10 +22,11 @@ function Login({userLoggedIn, userData}) {
             })
         })
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        userLoggedIn(true)
+        let status
+
         if(formData.email && formData.password){
             const requestOptions = {
                 method: 'POST',
@@ -33,22 +36,29 @@ function Login({userLoggedIn, userData}) {
                 body: JSON.stringify(formData)
             }
             fetch(`${url}/api/login`, requestOptions)
-            .then(res => res.json())
-            .then(data =>{
-                userData(data)
+            .then(res => {
+                status = res.status
+                return res.json()
+            }).then(data =>{
+                if(status===200){
+                    userData(data)
+                    userLoggedIn(true)
+                }else setMessage(data)
             }).catch(err => {
+                setMessage('Connection error')
                 console.log(err)
             })
         }else{
-            console.log('Missing field')
+            setMessage('Missing field')
         }
     }
 
     //Google auth
     const onSuccess = async res => {
         // console.log('[login success] User:', res)
-        userLoggedIn(true)
         const token = {token: res.tokenId}
+        let status
+
         const requestOptions = {
             method: 'POST',
             headers: { 
@@ -57,14 +67,24 @@ function Login({userLoggedIn, userData}) {
             body: JSON.stringify(token)
         }
         fetch(`${url}/api/gauth`, requestOptions)
-        .then(response => response.json())
+        .then(response => {
+            status = response.status
+            return response.json() 
+        })
         .then(data =>{
-            userData(data)
-        }).catch(err => console.log(err))
+            if(status===200){
+                userData(data)
+                userLoggedIn(true)
+            }else setMessage(data)
+        }).catch(err =>{
+            setMessage('Connection error')
+            console.log(err)
+        })
     }
     
     const onFailure = res => {
-        console.log('[login failed] Res:', res)
+        setMessage('Login failed')
+        console.log('[login error]:', res)
     }
     //------------   
 
@@ -114,6 +134,9 @@ function Login({userLoggedIn, userData}) {
                     Login
                 </button>
             </form>
+            <div className='ntfnl'>
+                <p className='msg'>{message}</p>
+            </div>
         </div>
     )
 }

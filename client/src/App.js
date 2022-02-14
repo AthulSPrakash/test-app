@@ -10,9 +10,10 @@ import Home from './components/home'
 
 function App() {
   const [userDetail, setUserDetail] = useState()
+  // const [loggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate()
 
-  const navStyle = (isActive) => {
+  const navStyle = isActive => {
     return{
       textDecoration: 'none',
       fontWeight: '600',
@@ -22,13 +23,17 @@ function App() {
     }
   }
 
-  const userLoggedIn = (loggedIn) =>{
-    if(loggedIn) document.querySelector('.app-nav').style.display = 'none'
+  const userDetails = data => {
+    setUserDetail(data)
   }
 
-  const userDetails = (data) => {
-    setUserDetail(data)
-    navigate('dashboard')
+  const userLoggedIn = x =>{
+    const nav = document.querySelector('.app-nav')
+    // setLoggedIn(x)
+    if(x){
+      nav.style.display = 'none'
+      navigate('dashboard')
+    }
   }
 
   return (

@@ -14,8 +14,10 @@ function Reg({userLoggedIn, userData}) {
     confirmPass: ''
   })
   const [regComplete, setRegComplete] = useState(false)
+  const [message, setMessage] = useState('') 
 
   const handleChange = (e) => {
+    setMessage('')
       setFormData(prevFormData=>{
         return({
             ...prevFormData,
@@ -26,12 +28,13 @@ function Reg({userLoggedIn, userData}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    userLoggedIn(true)
+    let status
+
     if(formData.username && formData.email 
       && formData.password 
       && formData.confirmPass){
       if(formData.confirmPass!==formData.password){
-        console.log('mismatch')
+        setMessage('Password mismatch')
       }else{
         const regData = {
           username: formData.username,
@@ -47,37 +50,55 @@ function Reg({userLoggedIn, userData}) {
           body: JSON.stringify(regData)
         }
         fetch(`${url}/api/register`, requestOptions)
-        .then(res => res.json())
+        .then(res => {
+          status = res.status
+          return res.json()
+        })
         .then(data => {
-          setRegComplete(true)
-        }).catch(err => console.log(err))
+          if(status===400) setMessage(data)
+          else setRegComplete(true)
+        }).catch(err =>{
+          setMessage('Connection error')
+          console.log(err)
+        })
       }
     }else{
-      console.log('Missing field')
+      setMessage('Missing field')
     }
   }
 
   //Google auth
   const onSuccess = async res => {
     // console.log('[login success] User:', res)
-    userLoggedIn(true)
     const token = {token: res.tokenId}
+    let status
+
     const requestOptions = {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json'
-         },
-        body: JSON.stringify(token)
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(token)
     }
     fetch(`${url}/api/gauth`, requestOptions)
-    .then(response => response.json())
+    .then(response => {
+      status = response.status
+      return response.json() 
+    })
     .then(data =>{
+      if(status===200){
         userData(data)
-    }).catch(err => console.log(err))
+        userLoggedIn(true)
+      }else setMessage(data)
+    }).catch(err =>{
+      setMessage('Connection error')
+      console.log(err)
+    })
   }
 
   const onFailure = res => {
-      console.log('[login failed] Res:', res)
+    setMessage('Login failed')
+    console.log('[login error]:', res)
   }
   //------------
 
@@ -144,6 +165,9 @@ function Reg({userLoggedIn, userData}) {
           />
           <button className='sign-btn' onClick={handleSubmit}>Register</button>
         </form>
+        <div className='ntfnr'>
+          <p className='msg'>{message}</p>
+        </div>
       </div>
       :
       <div className='greeting'>

@@ -32,7 +32,7 @@ const googleAuth = async token => {
     const payload = ticket.getPayload()
     // console.log('Paylod:', payload)
 
-    // console.log(`User ${payload.name} verified`)
+    console.log(`User ${payload.name} verified`)
 
     const { sub, name, email, picture } = payload
     const userId = sub

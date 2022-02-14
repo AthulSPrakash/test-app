@@ -14,7 +14,7 @@ function Dashboard({userData}) {
     const [createBox ,setCreateBox] = useState(false)
     const [deleteBox ,setDeleteBox] = useState(false)
     const [catgName, setCatgName] = useState('')
-    const [category, setCategory] = useState(userData.data || [])
+    const [category, setCategory] = useState( userData.data )
     const [temp, setTemp] = useState()
 
     const { signOut } = useGoogleLogout({
@@ -22,7 +22,7 @@ function Dashboard({userData}) {
         // onLogoutSuccess,
         // onFailure
     })
-    
+
     const showMenu = () => {
         document.querySelector('.settings-box').classList.toggle('visible')
         document.querySelector('.settings-btn').classList.toggle('invert')

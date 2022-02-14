@@ -14,10 +14,10 @@ app.post('/', async (req,res)=>{
 
     //email check
     const user = await userModel.findOne({ email: req.body.email })
-    if(!user) return res.status(400).json('Invalid email')
+    if(!user) return res.status(400).json('User not found')
     //password check
     const validPass = await bcrypt.compare(req.body.password, user.password)
-    if(!validPass) return res.status(400).json('Invalid password') 
+    if(!validPass) return res.status(400).json('Invalid credentials') 
 
     const token = JWT.sign({_id: user._id}, process.env.TOKEN_KEY)
     const data = {

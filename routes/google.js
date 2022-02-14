@@ -19,7 +19,7 @@ app.post('/', async (req,res)=>{
         email: user.email,
         name: user.name,
         image: user.image,
-        data: emailExist.data
+        data: emailExist && emailExist.data || []
     }
 
     if(!emailExist){
@@ -29,7 +29,9 @@ app.post('/', async (req,res)=>{
         const newUser = new userModel({
             username: user.name,
             email: user.email,
-            password: cipherPass
+            password: cipherPass,
+            image: user.image,
+            data: []
         })
 
         try{
@@ -39,7 +41,7 @@ app.post('/', async (req,res)=>{
             res.status(500).json(err)
         }
     }else{
-        res.json(data)
+        res.status(200).json(data)
     }
 })
 
