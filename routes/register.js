@@ -1,9 +1,10 @@
 const app = require('express')()
+const cors = require('cors')
 const userModel = require('../components/models')
 const bcrypt = require('bcrypt')
 const { regValidation } = require('../components/validation')
 
-app.post('/', async (req,res)=>{
+app.post('/', cors(), async (req,res)=>{
     //data validation
     const err = regValidation(req.body)
     if(err) return res.status(400).json(err.details[0].message)

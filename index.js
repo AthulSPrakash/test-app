@@ -8,23 +8,6 @@ const SaveData = require('./routes/saveData')
 
 const app = express()
 
-const corsOption = {
-    origin: '*',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true
-}
-
-app.use(cors(corsOption))
-
-app.use(function(req, res, next){
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-    res.setHeader('Access-Control-Allow-Credentials', true)
-    next()
-})
-
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -46,6 +29,7 @@ mongoose.connect(url,
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.log(err))
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/gauth', Google)
