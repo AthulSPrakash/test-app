@@ -5,6 +5,7 @@ const Login = require('./routes/login')
 const Google = require('./routes/google')
 const Register = require('./routes/register')
 const SaveData = require('./routes/saveData')
+const Test = require('./routes/test')
 const app = express()
 
 app.use(cors())
@@ -32,10 +33,7 @@ mongoose.connect(url,
 
 app.use(express.json())
 
-app.get('/', (req,res)=>{
-    res.json('hello world')
-})
-
+app.use('./api/test', Test)
 app.use('/api/gauth', Google)
 app.use('/api/login', Login)
 app.use('/api/register', Register)

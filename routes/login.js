@@ -14,7 +14,7 @@ app.post('/', async (req,res)=>{
 
     //email check
     const user = await userModel.findOne({ email: req.body.email })
-    if(!user) return res.status(400).json('User not found')
+    if(!user) return res.status(400).json('User not registerd')
     //password check
     const validPass = await bcrypt.compare(req.body.password, user.password)
     if(!validPass) return res.status(400).json('Invalid credentials') 

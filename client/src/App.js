@@ -36,7 +36,7 @@ function App() {
     }
   }
 
-  fetch('https://test-athul.herokuapp.com')
+  fetch('https://test-athul.herokuapp.com/api/test')
   .then(res=>res.json())
   .then(data=>console.log(data))
 
