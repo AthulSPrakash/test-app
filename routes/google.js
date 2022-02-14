@@ -7,6 +7,13 @@ const JWT = require('jsonwebtoken')
 const dotenv = require('dotenv')
 dotenv.config()
 
+app.use((req, res, next)=>{
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+    next()
+})
+
 app.post('/', async (req,res)=>{
 
     const user = await googleAuth(req.body.token)
