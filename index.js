@@ -20,7 +20,7 @@ const cluster = process.env.CLUSTER
 const dbname = process.env.DB_NAME
 const url = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
-mongoose.connect(url, {
+mongoose.connect('mongodb://Athul:<password>@cluster0-shard-00-00.pqq7v.mongodb.net:27017,cluster0-shard-00-01.pqq7v.mongodb.net:27017,cluster0-shard-00-02.pqq7v.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-qwfgu4-shard-0&authSource=admin&retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
