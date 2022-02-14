@@ -10,16 +10,20 @@ const app = express()
 
 const corsOption = {
     origin: '*',
-    methodd: [
-        'GET',
-        'POST'
-    ],
-    allowedHeaders: [
-        'Content-Type',
-    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true
 }
 
 app.use(cors(corsOption))
+
+// app.use(function(req, res, next){
+//     res.setHeader('Access-Control-Allow-Origin', '*')
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+//     res.setHeader('Access-Control-Allow-Credentials', true)
+//     next()
+// })
 
 const dotenv = require('dotenv')
 dotenv.config()
