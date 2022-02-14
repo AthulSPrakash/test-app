@@ -5,26 +5,24 @@ const Login = require('./routes/login')
 // const Google = require('./routes/google')
 const Register = require('./routes/register')
 const SaveData = require('./routes/saveData')
+const dotenv = require('dotenv')
 
-const { googleAuth } = require('../components/validation')
-const userModel = require('../components/models')
+const { googleAuth } = require('./components/validation')
+const userModel = require('./components/models')
 const bcrypt = require('bcrypt')
 const JWT = require('jsonwebtoken')
 
 const app = express()
 
-const dotenv = require('dotenv')
 dotenv.config()
 
 app.use(cors())
 
 const port = process.env.PORT || 5000
-
 const username = process.env.USER_NAME
 const password = process.env.PASSWORD
 // const cluster = process.env.CLUSTER
 const dbname = process.env.DB_NAME
-
 const url = `mongodb://${username}:${password}@cluster0-shard-00-00.pqq7v.mongodb.net:27017,cluster0-shard-00-01.pqq7v.mongodb.net:27017,cluster0-shard-00-02.pqq7v.mongodb.net:27017/${dbname}?ssl=true&replicaSet=atlas-qwfgu4-shard-0&authSource=admin&retryWrites=true&w=majority`
 
 mongoose.connect(url,
