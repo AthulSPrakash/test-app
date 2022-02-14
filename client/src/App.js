@@ -37,7 +37,10 @@ function App() {
   }
 
   fetch('https://test-athul.herokuapp.com/api/test')
-  .then(res=>res.json())
+  .then(res=>{
+    console.log(res)
+    return res.json()
+  })
   .then(data=>console.log(data))
 
   return (
