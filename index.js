@@ -18,7 +18,7 @@ const username = process.env.USER_NAME
 const password = process.env.PASSWORD
 const cluster = process.env.CLUSTER
 const dbname = process.env.DB_NAME
-const url = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority&ssl=true`
+const url = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
 mongoose.connect(url, {
     useNewUrlParser: true,
