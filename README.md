@@ -1,2 +1,2 @@
 # Test SPA
-Live : https://dazzling-heyrovsky-562cd1.netlify.app/
+Live : https://test-spa.netlify.app
