@@ -11,12 +11,7 @@ const port = process.env.PORT || 5000
 
 const app = express()
 
-const corsOptions = {
-    origin: 'https://test-spa.netlify.app',
-    credentials: true,
-    optionSuccessStatus: 200
-}
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 
 DBConnect().then(()=>console.log('DB Connection successfull!'))
