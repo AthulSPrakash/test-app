@@ -7,9 +7,6 @@ const Register = require('./routes/register')
 const SaveData = require('./routes/saveData')
 const port = process.env.PORT || 5000
 
-const dotenv = require('dotenv')
-dotenv.config()
-
 const app = express()
 
 const corsOptions = {
