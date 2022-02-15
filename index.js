@@ -25,13 +25,25 @@ const password = process.env.PASSWORD
 const cluster = process.env.CLUSTER
 const dbname = process.env.DB_NAME
 const url = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`
-
-mongoose.connect(url, {
+const mongooseOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
+}
+
+const connectDB = async () => {
+    try{
+        await mongoose.connect(url, mongooseOptions)
+    }catch (err) {
+        console.log('Error: ' + err)
+        throw err
+    }
+}
+
+connectDB().then(()=>{
+    console.log('Connected to MongoDB')
+}).catch(err=>{
+    console.log('Error :', err)
 })
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.log(err))
 
 app.use(express.json())
 
