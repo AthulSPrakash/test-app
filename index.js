@@ -5,6 +5,8 @@ const Login = require('./routes/login')
 const Google = require('./routes/google')
 const Register = require('./routes/register')
 const SaveData = require('./routes/saveData')
+require('dotenv').config()
+
 const port = process.env.PORT || 5000
 
 const app = express()
