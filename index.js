@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000
 const app = express()
 
 const corsOptions = {
-    origin: '*',
+    origin: 'https://test-spa.netlify.app',
     credentials: true,
     optionSuccessStatus: 200
 }
