@@ -35,6 +35,7 @@ mongoose.connect(url, {
 
 app.use(express.json())
 
+app.get('/', (req,res)=>{ console.log('Server running')})
 app.use('/api/gauth', Google)
 app.use('/api/login', Login)
 app.use('/api/register', Register)
