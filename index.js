@@ -31,11 +31,14 @@ const mongooseOptions = {
 }
 
 const connectDB = async () => {
+    let db = null
     try{
         await mongoose.connect(url, mongooseOptions)
+        db = mongoose.connect
         console.log('Connected to MongoDB')
     }catch (err) {
         console.log('Error: ' + err)
+        db && db.close()
     }
 }
 connectDB()
