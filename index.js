@@ -20,13 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
-DBConnect().then(async mongoose =>{
-    try{
-        console.log('DB Connection successfull!!');
-    }finally{
-        mongoose.connection.close()
-    }
-})
+DBConnect().then(()=>console.log('DB Connection successfull!!'))
 
 app.get('/', (req,res)=>{ res.json('Server running')})
 app.use('/api/gauth', Google)

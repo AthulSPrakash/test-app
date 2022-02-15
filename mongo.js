@@ -16,6 +16,4 @@ module.exports = async () => {
     await mongoose.connect(url, mongooseOptions)
     .then(x => console.log(`Connected to MongoDB!, ${x.connections[0].name}`))
     .catch(err => console.error('Error connecting to mongo', err))
-
-    return mongoose
 }

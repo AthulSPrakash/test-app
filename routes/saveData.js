@@ -6,7 +6,7 @@ app.post('/', verify, async (req,res)=>{
 
     const User = await userModel.findOne({email: req.body.email})
     const newData = {data: req.body.resumes}
-    await User.update(newData)
+    await User.updateOne(newData)
     // const updatedDoc = await userModel.findOne({ email: req.body.email })
     // console.log(updatedDoc)
 })
