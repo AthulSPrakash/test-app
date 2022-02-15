@@ -20,7 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
-DBConnect().then(()=>console.log('DB Connection successfull!!'))
+DBConnect().then(()=>console.log('DB Connection successfull!'))
 
 app.get('/', (req,res)=>{ res.json('Server running')})
 app.use('/api/gauth', Google)
