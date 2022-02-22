@@ -10,16 +10,18 @@ import Home from './components/home'
 
 function App() {
   const [userDetail, setUserDetail] = useState()
-  // const [loggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate()
 
   const navStyle = isActive => {
     return{
       textDecoration: 'none',
       fontWeight: '600',
+      color: isActive? 'var(--txt-alt)' : 'var(--txt)',
       fontFamily: 'Arial, Helvetica, sans-serif',
-      color: isActive ? 'lavender' : 'grey',
-      letterSpacing: '0.05em'
+      background: isActive ? '#f1f1f1' : 'none',
+      letterSpacing: '0.05em',
+      padding: '0.5em 0.75em',
+      borderRadius: '3px'
     }
   }
 
@@ -29,7 +31,6 @@ function App() {
 
   const userLoggedIn = x =>{
     const nav = document.querySelector('.app-nav')
-    // setLoggedIn(x)
     if(x){
       nav.style.display = 'none'
       navigate('dashboard')
@@ -45,7 +46,6 @@ function App() {
         >
           Login
         </NavLink>
-        |
         <NavLink 
           to={'/register'}
           style={({isActive})=>navStyle(isActive)}

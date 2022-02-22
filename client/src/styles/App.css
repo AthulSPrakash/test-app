@@ -32,6 +32,3 @@ body::-webkit-scrollbar{
   color: var(--off);
   font-weight: bold;
 }
-.app-nav a:hover{
-  color: var(--btn-bg);
-}

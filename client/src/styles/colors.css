@@ -1,11 +1,11 @@
 :root{
-    --bg: white;
+    --bg: #f1f1f1;
     --primary: blueviolet;
     --secondary: crimson;
     --dim: lightgrey;
-    --txt: white;
+    --txt: #f1f1f1;
     --txt-alt: rgb(20, 20, 100);
-    --btn-bg: lavender;
+    --btn-bg: #f1f1f1;
     --off: grey;
     --txt-dark: rgb(10,10,10);
 }

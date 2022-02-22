@@ -16,9 +16,9 @@ app.post('/', async (req,res)=>{
     
     const data = {
         token: token,
-        email: user.email,
-        name: user.name,
-        image: user.image,
+        email: emailExist && emailExist.email || user.email,
+        name: emailExist && emailExist.name || user.name,
+        image: emailExist && emailExist.image || user.image,
         data: emailExist && emailExist.data || []
     }
 
